@@ -2,10 +2,14 @@
 #define RENDERER_H
 
 #include "snake.h"
+#include "snake_food.h"
 
 #include "SDL.h"
 
 #include <vector>
+
+// forward declarations
+class SnakeFood;
 
 
 class Renderer {
@@ -17,9 +21,7 @@ public:
 
     ~Renderer();
 
-    void Render(Snake const &snake,
-                SDL_Point const &food,
-                SDL_Point const &slow_down_food);
+    void Render(const Snake& snake, const std::vector<SnakeFood>& edibles);
     void UpdateWindowTitle(int score, int fps);
 
 private:

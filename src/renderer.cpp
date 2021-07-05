@@ -1,7 +1,9 @@
 #include "renderer.h"
+#include "snake_food.h"
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 
 Renderer::Renderer(const std::size_t screen_width,
@@ -46,32 +48,38 @@ Renderer::~Renderer()
     SDL_Quit();
 }
 
-void Renderer::Render(Snake const &snake,
-                      SDL_Point const &food,
-                      SDL_Point const &slow_down_food)
+void Renderer::Render(const Snake& snake, const std::vector<SnakeFood>& foods)
 {
     SDL_Rect block;
     block.w = screen_width / grid_width;
     block.h = screen_height / grid_height;
 
     // Clear screen
-    SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
+    SDL_SetRenderDrawColor(sdl_renderer,
+                           Colors::charcoal.red_channel_value,
+                           Colors::charcoal.green_channel_value,
+                           Colors::charcoal.blue_channel_value,
+                           Colors::charcoal.alpha_channel_value);
     SDL_RenderClear(sdl_renderer);
 
     // Render food
-    SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xCC, 0x00, 0xFF);
-    block.x = food.x * block.w;
-    block.y = food.y * block.h;
-    SDL_RenderFillRect(sdl_renderer, &block);
-
-    // Render slow down food
-    SDL_SetRenderDrawColor(sdl_renderer, 0x2F, 0xF3, 0xE0, 0xFF);
-    block.x = slow_down_food.x * block.w;
-    block.y = slow_down_food.y * block.h;
-    SDL_RenderFillRect(sdl_renderer, &block);
+    for (auto& food : foods) {
+        SDL_SetRenderDrawColor(sdl_renderer,
+                               food.getColor().red_channel_value,
+                               food.getColor().green_channel_value,
+                               food.getColor().blue_channel_value,
+                               food.getColor().alpha_channel_value);
+        block.x = food.x * block.w;
+        block.y = food.y * block.h;
+        SDL_RenderFillRect(sdl_renderer, &block);
+    }
 
     // Render snake's body
-    SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_SetRenderDrawColor(sdl_renderer,
+                           Colors::white.red_channel_value,
+                           Colors::white.green_channel_value,
+                           Colors::white.blue_channel_value,
+                           Colors::white.alpha_channel_value);
     for (SDL_Point const &point : snake.body) {
         block.x = point.x * block.w;
         block.y = point.y * block.h;
@@ -82,9 +90,17 @@ void Renderer::Render(Snake const &snake,
     block.x = static_cast<int>(snake.head_x) * block.w;
     block.y = static_cast<int>(snake.head_y) * block.h;
     if (snake.alive) {
-        SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x7A, 0xCC, 0xFF);
+        SDL_SetRenderDrawColor(sdl_renderer,
+                               Colors::blue.red_channel_value,
+                               Colors::blue.green_channel_value,
+                               Colors::blue.blue_channel_value,
+                               Colors::blue.alpha_channel_value);
     } else {
-        SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
+        SDL_SetRenderDrawColor(sdl_renderer,
+                               Colors::red.red_channel_value,
+                               Colors::red.green_channel_value,
+                               Colors::red.blue_channel_value,
+                               Colors::red.alpha_channel_value);
     }
     SDL_RenderFillRect(sdl_renderer, &block);
 

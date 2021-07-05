@@ -20,7 +20,7 @@ public:
 
     void Update();
     void GrowBody();
-    bool SnakeCell(int x, int y);
+    bool isSnakeCell (int x, int y) const;
 
     Direction direction = Direction::kUp;
 
