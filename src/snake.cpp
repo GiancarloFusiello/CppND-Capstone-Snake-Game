@@ -1,6 +1,7 @@
 #include "snake.h"
 
 #include <cmath>
+#include <algorithm>
 
 
 void Snake::Update()
