@@ -7,13 +7,15 @@ SnakeFood::SnakeFood(const int _x,
                      const Color _color,
                      const int _display_interval,
                      const bool _decreases_snake_speed,
-                     const bool _decreases_snake_body)
+                     const bool _decreases_snake_body,
+                     const bool _kills_snake)
                     : x(_x),
                       y(_y),
                       color(_color),
                       display_interval(_display_interval),
                       decreases_snake_speed(_decreases_snake_speed),
-                      decreases_snake_body(_decreases_snake_body)
+                      decreases_snake_body(_decreases_snake_body),
+                      kills_snake(_kills_snake)
 {
 }
 
@@ -40,4 +42,9 @@ bool SnakeFood::decreasesSnakeSpeed() const
 bool SnakeFood::decreasesSnakeBody() const
 {
     return decreases_snake_body;
+}
+
+bool SnakeFood::killsSnake() const
+{
+    return kills_snake;
 }
