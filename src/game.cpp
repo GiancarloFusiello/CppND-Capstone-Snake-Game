@@ -14,11 +14,14 @@ Game::Game(const std::size_t grid_width,
 {
     int x = random_w(engine);
     int y = random_h(engine);
-    SnakeFood food(x, y, Colors::yellow, 1, false);
-    SnakeFood slow_down_food(-1, -1, Colors::cyan, 10, true);
 
-    foods.push_back(food);
+    SnakeFood normal_food(x, y, Colors::yellow, 1, false, false);
+    SnakeFood slow_down_food(-1, -1, Colors::cyan, 10, true, false);
+    SnakeFood decrease_tail_size_food(-1, -1, Colors::green, 13, false, true);
+
+    foods.push_back(normal_food);
     foods.push_back(slow_down_food);
+    foods.push_back(decrease_tail_size_food);
 }
 
 void Game::Run(const Controller &controller,
@@ -100,7 +103,13 @@ void Game::Update()
         if (food.isSnakeFoodCell(new_x, new_y)) {
             score++;
             PlaceFood();
-            snake.GrowBody();
+
+            if (food.decreasesSnakeBody()) {
+                snake.ShrinkBody();
+            } else {
+                snake.GrowBody();
+            }
+
             if (food.decreasesSnakeSpeed()) {
                 snake.speed /= 1.3;
             } else {

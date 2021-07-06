@@ -6,13 +6,15 @@ SnakeFood::SnakeFood(const int _x,
                      const int _y,
                      const Color _color,
                      const int _display_interval,
-                     const bool _decreases_snake_speed)
+                     const bool _decreases_snake_speed,
+                     const bool _decreases_snake_body)
                     : x(_x),
                       y(_y),
+                      color(_color),
                       display_interval(_display_interval),
-                      decreases_snake_speed(_decreases_snake_speed)
+                      decreases_snake_speed(_decreases_snake_speed),
+                      decreases_snake_body(_decreases_snake_body)
 {
-    color = _color;
 }
 
 int SnakeFood::getDisplayInterval() const
@@ -33,4 +35,9 @@ bool SnakeFood::isSnakeFoodCell(const int new_x, const int new_y) const
 bool SnakeFood::decreasesSnakeSpeed() const
 {
     return decreases_snake_speed;
+}
+
+bool SnakeFood::decreasesSnakeBody() const
+{
+    return decreases_snake_body;
 }

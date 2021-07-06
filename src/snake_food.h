@@ -14,19 +14,22 @@ public:
               const int _y,
               const Color _color,
               const int _display_interval,
-              const bool _decreases_snake_speed);
+              const bool _decreases_snake_speed,
+              const bool _decreases_snake_body);
 
     int getDisplayInterval() const;
     Color getColor() const;
     bool isSnakeFoodCell(int x, int y) const;
     bool decreasesSnakeSpeed() const;
+    bool decreasesSnakeBody() const;
 
     int x;
     int y;
 
 private:
     int display_interval;
-    bool decreases_snake_speed = false;
+    bool decreases_snake_speed;
+    bool decreases_snake_body;
     Color color;
 };
 

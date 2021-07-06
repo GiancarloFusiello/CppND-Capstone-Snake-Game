@@ -52,7 +52,7 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell)
 
     if (!growing) {
         // Remove the tail from the vector.
-        body.erase(body.begin());
+        body.pop_front();
     } else {
         growing = false;
         size++;
@@ -67,6 +67,14 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell)
 }
 
 void Snake::GrowBody() { growing = true; }
+
+void Snake::ShrinkBody()
+{
+    for (int i = 0; i < 5; i++) {
+        body.pop_front();
+        size--;
+    }
+}
 
 bool Snake::isSnakeCell(int x, int y) const
 {
