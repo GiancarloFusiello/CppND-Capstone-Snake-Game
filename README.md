@@ -1,12 +1,43 @@
-# CPPND: Capstone Snake Game Example
+# CPPND: Capstone Snake Game
 
-This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). The code for this repo was inspired by [this](https://codereview.stackexchange.com/questions/212296/snake-game-in-c-with-sdl) excellent StackOverflow post and set of responses.
+For the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213)
+I decided to extend the [Snake Game](https://github.com/udacity/CppND-Capstone-Snake-Game) example code
+that was inspired by [this](https://codereview.stackexchange.com/questions/212296/snake-game-in-c-with-sdl) 
+excellent StackOverflow post and set of responses.
 
-<img src="snake_game.gif"/>
+![snake game gif](images/snake_game.gif)
 
-The Capstone Project gives you a chance to integrate what you've learned throughout this program. This project will become an important part of your portfolio to share with current and future colleagues and employers.
+I have extended the game by adding new foods that have different effects. They are as follows:
 
-In this project, you can build your own C++ application or extend this Snake game, following the principles you have learned throughout this Nanodegree Program. This project will demonstrate that you can independently create applications using a wide range of C++ features.
+![cyan colored food](images/cyan-snake-food.png) 
+appears after every 10 points scored and decreases the snakes speed when eaten
+
+![green colored food](images/green-snake-food.png)
+appears after every 13 points scored and decreases the snakes body size when eaten
+
+![magenta colored food](images/magenta-snake-food.png)
+appears after every 15 points scored and kills the snake when eaten
+
+## Rubric points
+**The project demonstrates an understanding of C++ functions and control structures** - This can be found in
+`src/game.cpp` between lines 71-93 and 95-128.
+
+**The project uses Object Oriented Programming techniques** - class `SnakeFood` in `src/snake_food.h` 
+replaces `Game.food` (line 20 in `src/game.h` commit beginning a4457ef) which encapsulates properties 
+of snake food.
+
+**Classes use appropriate access specifiers for class members** - This can be found in `src/snake_food.h`
+on lines 12, 31.
+
+**Class constructors utilize member initialization lists** - This can be found in `src/snake_food.cpp` 
+on lines 5-18.
+
+**Classes abstract implementation details from their interfaces** - This can found through `src/snake_food.cpp`
+where member functions are used to get private attributes that should be not mutable by the calling class/function.
+
+**Classes encapsulate behavior** - This can be seen in `src/snake_food.h` and `src/color.h` where the `SnakeFood`
+ and `Color` types where added to encapsulate the relevant data. The `Game`, `Snake` and `Renderer` classes
+where modified to utilize these new types.
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
